@@ -1,0 +1,41 @@
+{
+  "token": "YOUR_BOT_TOKEN_HERE",
+  "clientId": "1520690198277652680",
+  "guildId": "1477540132931244134",
+  "adminRole": "1477542921929756753",
+  "staffRole": "1477542921929756753",
+  "logChannel": "1477540132931244135",
+  "payment": {
+    "dana": "083153742020",
+    "name": "EKA FITRI SAHARANI"
+  },
+  "games": {
+    "free_fire": {
+      "title": "FREE FIRE STORE",
+      "tagline": "Top Up Aman",
+      "idFormat": "8-12 digits"
+    },
+    "ml": {
+      "title": "MOBILE LEGENDS STORE",
+      "tagline": "Safe & Trusted",
+      "idFormat": "number + zone"
+    },
+    "roblox": {
+      "title": "ROBLOX STORE",
+      "tagline": "Verified Robux",
+      "idFormat": "username or user ID"
+    }
+  },
+  "cooldown": {
+    "checkout": 10000,
+    "buttonClick": 2000,
+    "orderCreation": 5000
+  },
+  "features": {
+    "paymentPostClaimOnly": true,
+    "ticketLockBeforeClaim": true,
+    "gameIdValidation": true,
+    "antiSpam": true,
+    "autoRestart": true
+  }
+}
