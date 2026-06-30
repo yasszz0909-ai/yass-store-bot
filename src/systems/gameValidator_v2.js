@@ -7,11 +7,12 @@ function validateGame(type, data) {
   }
 
   if (type === 'ml') {
-    return data.userId && data.zoneId;
+    return Boolean(clean(data.userId)) && Boolean(clean(data.zoneId));
   }
 
   if (type === 'roblox') {
-    return clean(data.username)?.length >= 3;
+    const name = clean(data.username);
+    return typeof name === 'string' && name.length >= 3;
   }
 
   return false;
