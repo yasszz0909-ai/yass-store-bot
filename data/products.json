@@ -1,0 +1,16 @@
+{
+  "free_fire": {
+    "title": "FREE FIRE STORE",
+    "tagline": "Top Up Aman",
+    "diamonds": [
+      {
+        "amount": 140,
+        "price": 19600
+      },
+      {
+        "amount": 210,
+        "price": 29000
+      }
+    ]
+  }
+}
