@@ -1,34 +1,51 @@
-const config = require('./configBridge');
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const { resolvePayment } = require('./paymentManager');
 
 /**
- * Post-Claim Payment Injector
- * Sends payment instructions to a ticket channel only AFTER staff claims it.
+ * Builds the post-claim payment embed. Only ever shown AFTER an admin claims
+ * the ticket. Includes QRIS image when one is set on the ticket/override/config.
  */
-async function sendPaymentAfterClaim(ticket, channel) {
-  if (!ticket || !channel) return;
+function buildPaymentEmbed(ticket, claimerId) {
+  const pay = resolvePayment(ticket, claimerId);
 
-  const payment = config.payment || {};
+  const embed = new EmbedBuilder()
+    .setTitle('💳 PAYMENT REQUIRED')
+    .setColor(0x00ff99)
+    .setDescription(
+      [
+        `Buyer: <@${ticket.userId}>`,
+        `Item: ${ticket.item}`,
+        `Total: Rp ${ticket.price}`,
+        '',
+        '📌 PAYMENT METHOD:',
+        `DANA: ${pay.dana || '-'}`,
+        `A/N: ${pay.name || '-'}`
+      ].join('\n')
+    )
+    .setFooter({ text: `Invoice: ${ticket.invoice || '-'}` });
 
-  const embed = {
-    title: '💳 PAYMENT REQUIRED (POST CLAIM)',
-    description: [
-      `Invoice: ${ticket.invoice || '-'}`,
-      `Buyer: ${ticket.user}`,
-      `Item: ${ticket.item}`,
-      `Total: Rp ${ticket.price}`,
-      '',
-      `📌 DANA: ${payment.dana || '-'}`,
-      `A/N: ${payment.name || '-'}`
-    ].join('\n'),
-    color: 0x00ff99
-  };
-
-  const qris = ticket.qris || payment.qris;
-  if (qris) {
-    embed.image = { url: qris };
+  if (pay.qris) {
+    embed.addFields({ name: '📷 QRIS', value: 'Scan QRIS di bawah ini.' });
+    embed.setImage(pay.qris);
   }
 
-  return channel.send({ embeds: [embed] });
+  return embed;
 }
 
-module.exports = { sendPaymentAfterClaim };
+function paymentButtons() {
+  return new ActionRowBuilder().addComponents(
+    new ButtonBuilder().setCustomId('pay_approve').setLabel('Approve Payment').setStyle(ButtonStyle.Success),
+    new ButtonBuilder().setCustomId('pay_reject').setLabel('Reject').setStyle(ButtonStyle.Danger),
+    new ButtonBuilder().setCustomId('pay_done').setLabel('Mark Done').setStyle(ButtonStyle.Secondary)
+  );
+}
+
+async function sendPaymentAfterClaim(ticket, channel, claimerId) {
+  if (!ticket || !channel) return null;
+  return channel.send({
+    embeds: [buildPaymentEmbed(ticket, claimerId)],
+    components: [paymentButtons()]
+  });
+}
+
+module.exports = { sendPaymentAfterClaim, buildPaymentEmbed, paymentButtons };

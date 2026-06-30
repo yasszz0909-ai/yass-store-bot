@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node index.js",
-    "lint": "node -c index.js && node -e \"require('./src/systems/configBridge');require('./src/systems/gameValidator_v2');require('./src/systems/paymentPostClaim_v2');require('./src/systems/safetyLogger')\""
+    "lint": "node -c index.js && node -e \"const fs=require('fs');fs.readdirSync('./src/systems').filter(f=>f.endsWith('.js')).forEach(f=>require('./src/systems/'+f))\""
   },
   "engines": {
     "node": ">=18"
