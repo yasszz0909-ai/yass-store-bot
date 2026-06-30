@@ -11,7 +11,8 @@ const {
   ButtonStyle,
   ModalBuilder,
   TextInputBuilder,
-  TextInputStyle
+  TextInputStyle,
+  MessageFlags
 } = require('discord.js');
 
 const config = require('./src/systems/configBridge');
@@ -97,10 +98,28 @@ function ticketName(gameKey, label) {
 // ---------------------------------------------------------------------------
 // Safe interaction helpers
 // ---------------------------------------------------------------------------
+// Normalize the deprecated `ephemeral: true` option to the `flags` form.
+function eph(payload) {
+  if (payload && typeof payload === 'object' && payload.ephemeral) {
+    const { ephemeral, ...rest } = payload;
+    rest.flags = (rest.flags || 0) | MessageFlags.Ephemeral;
+    return rest;
+  }
+  return payload;
+}
+
+function stripEph(payload) {
+  if (payload && typeof payload === 'object' && 'ephemeral' in payload) {
+    const { ephemeral, ...rest } = payload;
+    return rest;
+  }
+  return payload;
+}
+
 async function safeReply(interaction, payload) {
   try {
-    if (interaction.replied || interaction.deferred) return await interaction.followUp(payload);
-    return await interaction.reply(payload);
+    if (interaction.replied || interaction.deferred) return await interaction.followUp(eph(payload));
+    return await interaction.reply(eph(payload));
   } catch (err) {
     logger.log('REPLY_FAIL', err.message);
   }
@@ -108,7 +127,7 @@ async function safeReply(interaction, payload) {
 
 async function safeUpdate(interaction, payload) {
   try {
-    return await interaction.update(payload);
+    return await interaction.update(stripEph(payload));
   } catch (err) {
     logger.log('UPDATE_FAIL', err.message);
   }
@@ -204,7 +223,7 @@ async function handleOrderSubmit(interaction) {
     return safeReply(interaction, { content: 'Pesanan tidak valid.', ephemeral: true });
   }
 
-  await interaction.deferReply({ ephemeral: true });
+  await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
   // Anti double-order: serialize per user.
   if (!cooldowns.acquire(interaction.user.id)) {
@@ -506,15 +525,15 @@ client.on('interactionCreate', async (interaction) => {
       }
       if (interaction.commandName === 'panel') {
         if (!isStaffMember(interaction.member)) {
-          return interaction.reply({ content: 'Khusus admin.', ephemeral: true });
+          return interaction.reply(eph({ content: 'Khusus admin.', ephemeral: true }));
         }
-        return interaction.reply(dashboard.buildDashboard());
+        return interaction.reply(eph(dashboard.buildDashboard()));
       }
       if (interaction.commandName === 'resetdata') {
         if (!isStaffMember(interaction.member)) {
-          return interaction.reply({ content: 'Khusus admin.', ephemeral: true });
+          return interaction.reply(eph({ content: 'Khusus admin.', ephemeral: true }));
         }
-        return interaction.reply(dashboard.resetConfirm());
+        return interaction.reply(eph(dashboard.resetConfirm()));
       }
       return;
     }
