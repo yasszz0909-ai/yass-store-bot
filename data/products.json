@@ -1,0 +1,80 @@
+{
+  "free_fire": {
+    "title": "FREE FIRE STORE",
+    "tagline": "Top Up Aman",
+    "game_id": "ff",
+    "category": "top-up",
+    "diamonds": [
+      {
+        "id": "ff_140",
+        "amount": 140,
+        "price": 19600,
+        "label": "140 Diamond"
+      },
+      {
+        "id": "ff_210",
+        "amount": 210,
+        "price": 29000,
+        "label": "210 Diamond"
+      },
+      {
+        "id": "ff_500",
+        "amount": 500,
+        "price": 69000,
+        "label": "500 Diamond"
+      }
+    ]
+  },
+  "ml": {
+    "title": "MOBILE LEGENDS STORE",
+    "tagline": "Safe & Trusted",
+    "game_id": "ml",
+    "category": "top-up",
+    "diamonds": [
+      {
+        "id": "ml_50",
+        "amount": 50,
+        "price": 8000,
+        "label": "50 Diamond"
+      },
+      {
+        "id": "ml_100",
+        "amount": 100,
+        "price": 16000,
+        "label": "100 Diamond"
+      },
+      {
+        "id": "ml_500",
+        "amount": 500,
+        "price": 76000,
+        "label": "500 Diamond"
+      }
+    ]
+  },
+  "roblox": {
+    "title": "ROBLOX STORE",
+    "tagline": "Verified Robux",
+    "game_id": "roblox",
+    "category": "robux",
+    "robux": [
+      {
+        "id": "roblox_400",
+        "amount": 400,
+        "price": 50000,
+        "label": "400 Robux"
+      },
+      {
+        "id": "roblox_1000",
+        "amount": 1000,
+        "price": 120000,
+        "label": "1000 Robux"
+      },
+      {
+        "id": "roblox_5000",
+        "amount": 5000,
+        "price": 540000,
+        "label": "5000 Robux"
+      }
+    ]
+  }
+}
