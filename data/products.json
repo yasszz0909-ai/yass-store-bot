@@ -16,9 +16,30 @@
     "game_id": "ml",
     "category": "top-up",
     "items": [
-      { "id": "ml_50", "amount": 50, "price": 8000, "label": "50 Diamond" },
-      { "id": "ml_100", "amount": 100, "price": 16000, "label": "100 Diamond" },
-      { "id": "ml_500", "amount": 500, "price": 76000, "label": "500 Diamond" }
+      { "id": "ml_wdp", "amount": "wdp", "price": 29000, "label": "Weekly Diamond Pass (WDP)" },
+      { "id": "ml_3", "amount": 3, "price": 1500, "label": "3 Diamonds" },
+      { "id": "ml_5", "amount": 5, "price": 2000, "label": "5 Diamonds" },
+      { "id": "ml_10", "amount": 10, "price": 3500, "label": "10 Diamonds" },
+      { "id": "ml_12", "amount": 12, "price": 4000, "label": "12 Diamonds" },
+      { "id": "ml_14", "amount": 14, "price": 4500, "label": "14 Diamonds" },
+      { "id": "ml_18", "amount": 18, "price": 5500, "label": "18 Diamonds" },
+      { "id": "ml_19", "amount": 19, "price": 5500, "label": "19 Diamonds" },
+      { "id": "ml_28", "amount": 28, "price": 8000, "label": "28 Diamonds" },
+      { "id": "ml_36", "amount": 36, "price": 10000, "label": "36 Diamonds" },
+      { "id": "ml_44", "amount": 44, "price": 11000, "label": "44 Diamonds" },
+      { "id": "ml_59", "amount": 59, "price": 14000, "label": "59 Diamonds" },
+      { "id": "ml_74", "amount": 74, "price": 19000, "label": "74 Diamonds" },
+      { "id": "ml_85", "amount": 85, "price": 20500, "label": "85 Diamonds" },
+      { "id": "ml_170", "amount": 170, "price": 43500, "label": "170 Diamonds" },
+      { "id": "ml_222", "amount": 222, "price": 54500, "label": "222 Diamonds" },
+      { "id": "ml_240", "amount": 240, "price": 60000, "label": "240 Diamonds" },
+      { "id": "ml_296", "amount": 296, "price": 73500, "label": "296 Diamonds" },
+      { "id": "ml_370", "amount": 370, "price": 95000, "label": "370 Diamonds" },
+      { "id": "ml_408", "amount": 408, "price": 103000, "label": "408 Diamonds" },
+      { "id": "ml_568", "amount": 568, "price": 144000, "label": "568 Diamonds" },
+      { "id": "ml_875", "amount": 875, "price": 223000, "label": "875 Diamonds" },
+      { "id": "ml_966", "amount": 966, "price": 239000, "label": "966 Diamonds" },
+      { "id": "ml_2010", "amount": 2010, "price": 485500, "label": "2010 Diamonds" }
     ]
   },
   "roblox": {
